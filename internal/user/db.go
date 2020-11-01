@@ -50,15 +50,15 @@ func (u *User) Save() error {
 	return nil
 }
 
-func (u *User) Authenticate() error {
+func (u *User) Authenticate() bool {
 	du := &User{
 		Username: u.Username,
 	}
 	if err := du.FetchByUsername(); err != nil {
-		return nil
+		return false
 	}
 	if err := bcrypt.CompareHashAndPassword([]byte(du.Password), []byte(u.Password)); err != nil {
-		return nil
+		return false
 	}
-	return nil
+	return true
 }

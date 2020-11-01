@@ -1,6 +1,8 @@
 package db
 
 import (
+	"fmt"
+	"github.com/vmware/vending/internal/utils"
 	"log"
 	"os"
 	"gorm.io/gorm/logger"
@@ -19,7 +21,13 @@ func InitDB()  {
 	var DBReconnectRetryMax uint64 = 5
 	var DBReconnectRetryWait uint64 = 10
 
-	dsn := "postgres://postgres:mysecretpassword@localhost:5432/navami_db"
+	db := utils.Getenv("POSTGRES_DB", "postgres")
+	du := utils.Getenv("POSTGRES_USER", "postgres")
+	dp := utils.Getenv("POSTGRES_PASSWORD", "mysecretpassword")
+	dh := utils.Getenv("POSTGRES_HOST", "localhost")
+
+
+ 	dsn := fmt.Sprintf("postgres://%s:%s@%s:5432/%s", du, dp, dh, db)
 	dbLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
