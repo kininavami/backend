@@ -18,11 +18,12 @@ Run following commands to set up your postgres to support the execution
     psql <default-user> -d <default-database>
     ```
 - Execute sql schema statements
-    1. First statement will create enums for role column
-    2. Second statement will create user table   
+    1. create enums for role column of users table
     ```
-    create type virtual_vending.UserRolesEnum as enum ('manager', 'engineer', 'admin');
-    
+        create type virtual_vending.UserRolesEnum as enum ('manager', 'engineer', 'admin');
+    ```
+    2. create user table   
+    ```
     create table if not exists virtual_vending.users (
         id serial primary key,
         username varchar(63) not null,
@@ -34,6 +35,18 @@ Run following commands to set up your postgres to support the execution
         update_at timestamp default current_timestamp,
         constraint unique_username unique (username)
     ); 
+    ```
+    3. create products table   
+    ```
+    create table if not exists virtual_vending.products (
+        id serial primary  key,
+        name varchar not null,
+        description varchar not null,
+        cost int
+        created_at timestamp default current_timestamp,
+        updated_at timestamp default current_timestamp,
+        constraint unique_product_name unique (name)
+    );
     ```
   
  
