@@ -1,8 +1,8 @@
 package cart
 
-import "github.com/vmware/vending/internal/item"
+import "github.com/vmware/vending/internal/product"
 
 type Cart struct {
 	UserID uint
-	Items []item.Item
+	Items []product.Item
 }
