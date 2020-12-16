@@ -2,20 +2,21 @@ package db
 
 import (
 	"fmt"
-	"github.com/vmware/vending/internal/utils"
 	"log"
 	"os"
-	"gorm.io/gorm/logger"
-	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
-	"gorm.io/driver/postgres"
 	"time"
+
+	"github.com/vmware/vending/internal/utils"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+	"gorm.io/gorm/schema"
 )
 
 // Db gorm db object
 var Db *gorm.DB
 
-func InitDB()  {
+func InitDB() {
 
 	var DBReconnectRetry uint64
 	var DBReconnectRetryMax uint64 = 5
@@ -26,8 +27,7 @@ func InitDB()  {
 	dp := utils.Getenv("POSTGRES_PASSWORD", "mysecretpassword")
 	dh := utils.Getenv("POSTGRES_HOST", "localhost")
 
-
- 	dsn := fmt.Sprintf("postgres://%s:%s@%s:5432/%s", du, dp, dh, db)
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:5432/%s", du, dp, dh, db)
 	dbLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
