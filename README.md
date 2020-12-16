@@ -71,9 +71,30 @@ Run following commands to set up your postgres to support the execution
 ## Available APIs
 1. Creating user:
     ```/api/v1/user```
+
+Body:
+    {
+    "name": "Navami",
+     "username": "kinin",
+     "password": "VMware123!",
+     "role": "admin",
+     "address": "1774 JP Nagar 4th phase",
+     "email": "kinin@vmware.com"
+}
 2. Get all users:
     ```/api/v1/user```
 3. Get user by username
     ```/api/v1/user/<username>```
 4. Delete user
     ```/api/v1/user/<username>```
+
+5.Create product
+'''/api/v1/product
+
+Body 
+{
+    "name":"macbook pro",
+    "cost":"200000",
+    "description":macbook pro"
+}
+
