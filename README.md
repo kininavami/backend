@@ -106,7 +106,9 @@ Run following commands to set up your postgres to support the execution
    ```
 
 6. *login*: POST
+    
     ```/login```
+    
     Body:
     ```
     {
