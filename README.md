@@ -33,6 +33,7 @@ Run following commands to set up your postgres to support the execution
         role userrolesenum not null,
         created_at timestamp default current_timestamp,
         update_at timestamp default current_timestamp,
+        token varchar,
         constraint unique_username unique (username)
     ); 
     ```
@@ -72,29 +73,62 @@ Run following commands to set up your postgres to support the execution
 1. Creating user:
     ```/api/v1/user```
 
-Body:
-    {
+    Body:
+    ```{
     "name": "Navami",
      "username": "kinin",
      "password": "VMware123!",
      "role": "admin",
      "address": "1774 JP Nagar 4th phase",
      "email": "kinin@vmware.com"
-}
+    }```
 2. Get all users:
     ```/api/v1/user```
 3. Get user by username
     ```/api/v1/user/<username>```
 4. Delete user
     ```/api/v1/user/<username>```
-
 5.Create product
-'''/api/v1/product
+    ```/api/v1/product```
 
-Body 
-{
-    "name":"macbook pro",
-    "cost":"200000",
-    "description":macbook pro"
-}
+    Body:
+    ```
+   {
+        "name":"macbook pro",
+        "cost":"200000",
+        "description":macbook pro"
+    }
+   ```
+
+6. login
+    ```/login```
+    Body:
+    ```
+    {
+        "username": "kinin",
+        "password": "kinin"
+    }
+   ```
+   Response:
+   ```
+    {
+        "id": 0,
+        "created_at": "0001-01-01T00:00:00Z",
+        "update_at": "0001-01-01T00:00:00Z",
+        "name": "",
+        "username": "madhava",
+        "password": "",
+        "role": "",
+        "address": "",
+        "email": "",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdmEifQ.QprsO-FkFhOUjiOsMfY8Ik5NNfQOnX9DVf8gT2xikpw"
+    }
+    ```
+   
+   **NOTE**: Use the token generated in the above response, in header for all other calls to backend including GET calls. 
+   ex:
+   ```
+   "Authorization":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdmEifQ.QprsO-FkFhOUjiOsMfY8Ik5NNfQOnX9DVf8gT2xikpw"
+   ```
+   
 
