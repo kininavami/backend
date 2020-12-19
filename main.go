@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
 	"github.com/vmware/vending/external/db"
+	"github.com/vmware/vending/external/login"
 	"github.com/vmware/vending/internal/constants"
 	"github.com/vmware/vending/internal/product"
 	"github.com/vmware/vending/internal/user"
@@ -23,6 +24,7 @@ func init() {
 func main()  {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc(constants.HealthCheckUrl, ok)
+	router.Use(login.LoggingMiddleware)
 
 	//Users related operations
 	var u user.User
@@ -30,6 +32,7 @@ func main()  {
 	router.HandleFunc(constants.CreateUser, u.CreateUser).Methods(http.MethodPost)
 	router.HandleFunc(constants.GetUserByUsername, u.GetUserForUsername).Methods(http.MethodGet)
 	router.HandleFunc(constants.DeleteUserByUsername, u.DeleteUser).Methods(http.MethodDelete)
+	router.HandleFunc(constants.Login, u.LoginHandler).Methods(http.MethodPost)
 
 	//Users related operations
 	var p product.Product

@@ -11,6 +11,7 @@ const CreateUser = RestApiPrefix + "user"
 const GetAllUser = CreateUser
 const GetUserByUsername = CreateUser + "/{username:[a-zA-Z0-9_-]+}"
 const DeleteUserByUsername = GetUserByUsername
+const Login = "/login"
 
 //Product Operations URLs
 const CreateProduct = RestApiPrefix + "product"

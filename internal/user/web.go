@@ -2,12 +2,21 @@ package user
 
 import (
 	"encoding/json"
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 	"github.com/vmware/vending/external/middleware"
+	"io/ioutil"
 	"net/http"
 )
 
-func (u User) CreateUser(w http.ResponseWriter, r *http.Request)  {
+type ResponseResult struct {
+	Error  string `json:"error"`
+	Result string `json:"result"`
+}
+
+var LoginMap = make(map[string]bool)
+
+func (u User) CreateUser(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var user User
 	if err := decoder.Decode(&user); err != nil {
@@ -51,4 +60,41 @@ func (u *User) DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	middleware.RespondJSON(w, http.StatusNoContent, nil)
+}
+
+func (u *User) LoginHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var user User
+	body, _ := ioutil.ReadAll(r.Body)
+	err := json.Unmarshal(body, &user)
+	var res ResponseResult
+	if err != nil {
+		//log.Fatal(err)
+	}
+	isAuthenticated := user.Authenticate()
+
+	if !isAuthenticated {
+		res.Error = "Invalid password"
+		json.NewEncoder(w).Encode(res)
+		return
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"username": user.Username,
+	})
+
+	tokenString, err := token.SignedString([]byte("secret"))
+
+	if err != nil {
+		res.Error = "Error while generating token,Try again"
+		json.NewEncoder(w).Encode(res)
+		return
+	}
+
+	user.Token = tokenString
+	user.Password = ""
+	LoginMap[user.Username] = true
+
+	err = json.NewEncoder(w).Encode(user)
+
 }
