@@ -71,6 +71,7 @@ Run following commands to set up your postgres to support the execution
    
 ## Available APIs
 1. *Creating user*: POST
+    
     ```/api/v1/user```
 
     Body:
@@ -83,12 +84,16 @@ Run following commands to set up your postgres to support the execution
      "email": "kinin@vmware.com"
     }```
 2. *Get all users*: GET
+    
     ```/api/v1/user```
 3. *Get user by username*: GET
+    
     ```/api/v1/user/<username>```
 4. *Delete user*: DELETE
+    
     ```/api/v1/user/<username>```
-5.*Create product*: POST
+5. *Create product*: POST
+    
     ```/api/v1/product```
 
     Body:
@@ -126,6 +131,7 @@ Run following commands to set up your postgres to support the execution
     ```
    
    **NOTE**: Use the token generated in the above response, in header for all other calls to backend including GET calls. 
+   
    ex:
    ```
    "Authorization":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdmEifQ.QprsO-FkFhOUjiOsMfY8Ik5NNfQOnX9DVf8gT2xikpw"
