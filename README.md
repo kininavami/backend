@@ -70,7 +70,7 @@ Run following commands to set up your postgres to support the execution
    
    
 ## Available APIs
-1. Creating user:
+1. *Creating user*: POST
     ```/api/v1/user```
 
     Body:
@@ -82,13 +82,13 @@ Run following commands to set up your postgres to support the execution
      "address": "1774 JP Nagar 4th phase",
      "email": "kinin@vmware.com"
     }```
-2. Get all users:
+2. *Get all users*: GET
     ```/api/v1/user```
-3. Get user by username
+3. *Get user by username*: GET
     ```/api/v1/user/<username>```
-4. Delete user
+4. *Delete user*: DELETE
     ```/api/v1/user/<username>```
-5.Create product
+5.*Create product*: POST
     ```/api/v1/product```
 
     Body:
@@ -100,7 +100,7 @@ Run following commands to set up your postgres to support the execution
     }
    ```
 
-6. login
+6. *login*: POST
     ```/login```
     Body:
     ```
