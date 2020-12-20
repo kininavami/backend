@@ -9,6 +9,7 @@ import (
 
 func (p Product) CreateProduct(w http.ResponseWriter, r *http.Request)  {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	decoder := json.NewDecoder(r.Body)
@@ -26,6 +27,7 @@ func (p Product) CreateProduct(w http.ResponseWriter, r *http.Request)  {
 
 func (p *Product) GetAllProducts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var products Products
@@ -38,6 +40,7 @@ func (p *Product) GetAllProducts(w http.ResponseWriter, r *http.Request) {
 
 func (p *Product) GetProductByName(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
@@ -52,7 +55,7 @@ func (p *Product) GetProductByName(w http.ResponseWriter, r *http.Request) {
 
 func (u *Product) DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
 	username, _ := vars["name"]
