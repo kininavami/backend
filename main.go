@@ -10,6 +10,7 @@ import (
 	"github.com/vmware/vending/internal/user"
 	"io"
 	"net/http"
+	"github.com/gorilla/handlers"
 )
 
 func ok(w http.ResponseWriter, r *http.Request) {
@@ -39,7 +40,7 @@ func main()  {
 	router.HandleFunc(constants.CreateProduct, p.CreateProduct).Methods(http.MethodPost)
 	router.HandleFunc(constants.GetUserByUsername, p.GetProductByName).Methods(http.MethodGet)
 	router.HandleFunc(constants.DeleteProductByName, p.DeleteProduct).Methods(http.MethodDelete)
-
+	handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(router)
 
 
 	log.Println("Starting Webserver...")
