@@ -8,6 +8,9 @@ import (
 )
 
 func (p Product) CreateProduct(w http.ResponseWriter, r *http.Request)  {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	decoder := json.NewDecoder(r.Body)
 	var product Product
 	if err := decoder.Decode(&product); err != nil {
@@ -22,6 +25,9 @@ func (p Product) CreateProduct(w http.ResponseWriter, r *http.Request)  {
 }
 
 func (p *Product) GetAllProducts(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var products Products
 	if err := products.GetAllProducts(); err != nil {
 		middleware.RespondError(w, http.StatusBadRequest, err)
@@ -31,6 +37,9 @@ func (p *Product) GetAllProducts(w http.ResponseWriter, r *http.Request) {
 }
 
 func (p *Product) GetProductByName(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
 	username, _ := vars["name"]
 	p.Name = username
@@ -42,6 +51,9 @@ func (p *Product) GetProductByName(w http.ResponseWriter, r *http.Request) {
 }
 
 func (u *Product) DeleteProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	vars := mux.Vars(r)
 	username, _ := vars["name"]
 	u.Name = username
