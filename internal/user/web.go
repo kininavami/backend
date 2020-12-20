@@ -19,6 +19,7 @@ var LoginMap = make(map[string]bool)
 func (u User) CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
+	w.Header().Set("Content-Type", "*")
 
 	
 	decoder := json.NewDecoder(r.Body)
@@ -38,6 +39,7 @@ func (u User) CreateUser(w http.ResponseWriter, r *http.Request) {
 func (u *User) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
+	w.Header().Set("Content-Type", "*")
 
 	
 	var users Users
@@ -51,6 +53,7 @@ func (u *User) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 func (u *User) GetUserForUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
+	w.Header().Set("Content-Type", "*")
 
 	
 	vars := mux.Vars(r)
@@ -66,6 +69,7 @@ func (u *User) GetUserForUsername(w http.ResponseWriter, r *http.Request) {
 func (u *User) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
+	w.Header().Set("Content-Type", "*")
 
 	
 	vars := mux.Vars(r)
@@ -81,6 +85,7 @@ func (u *User) DeleteUser(w http.ResponseWriter, r *http.Request) {
 func (u *User) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
+	w.Header().Set("Content-Type", "*")
 
 	
 	var user User
