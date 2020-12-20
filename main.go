@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 	log "github.com/sirupsen/logrus"
 	"github.com/vmware/vending/external/db"
 	"github.com/vmware/vending/internal/constants"
@@ -44,7 +43,6 @@ func main()  {
 
 
 	log.Println("Starting Webserver...")
-	handler := cors.Default().Handler(mux)
 	if err := http.ListenAndServe(":8080", router); err != nil && err != http.ErrServerClosed {
 		log.Fatal(fmt.Sprintf("Application startup failed with error %s", err.Error()))
 	}
