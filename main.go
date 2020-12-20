@@ -10,6 +10,7 @@ import (
 	"github.com/vmware/vending/internal/user"
 	"io"
 	"net/http"
+	"github.com/rs/cors"
 )
 
 func ok(w http.ResponseWriter, r *http.Request) {
@@ -22,6 +23,13 @@ func init() {
 
 func main()  {
 	router := mux.NewRouter().StrictSlash(true)
+	router.Use()
+	n := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowCredentials: true,
+		AllowedMethods: []string{"*"},
+		Debug:            true,
+	})
 	router.HandleFunc(constants.HealthCheckUrl, ok)
 	//router.Use(login.LoggingMiddleware)
 
@@ -40,9 +48,10 @@ func main()  {
 	router.HandleFunc(constants.GetUserByUsername, p.GetProductByName).Methods(http.MethodGet)
 	router.HandleFunc(constants.DeleteProductByName, p.DeleteProduct).Methods(http.MethodDelete)
 
+	handler := n.Handler(router)
 
 	log.Println("Starting Webserver...")
-	if err := http.ListenAndServe(":8080", router); err != nil && err != http.ErrServerClosed {
+	if err := http.ListenAndServe(":8080", handler); err != nil && err != http.ErrServerClosed {
 		log.Fatal(fmt.Sprintf("Application startup failed with error %s", err.Error()))
 	}
 }
