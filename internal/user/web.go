@@ -18,9 +18,9 @@ var LoginMap = make(map[string]bool)
 
 func (u User) CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	decoder := json.NewDecoder(r.Body)
 	var user User
 	if err := decoder.Decode(&user); err != nil {
@@ -37,9 +37,9 @@ func (u User) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func (u *User) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	var users Users
 	if err := users.GetAllUsers(); err != nil {
 		middleware.RespondError(w, http.StatusBadRequest, err)
@@ -50,9 +50,9 @@ func (u *User) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 
 func (u *User) GetUserForUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	vars := mux.Vars(r)
 	username, _ := vars["username"]
 	u.Username = username
@@ -65,9 +65,9 @@ func (u *User) GetUserForUsername(w http.ResponseWriter, r *http.Request) {
 
 func (u *User) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	vars := mux.Vars(r)
 	username, _ := vars["username"]
 	u.Username = username
@@ -80,9 +80,9 @@ func (u *User) DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 func (u *User) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	var user User
 	body, _ := ioutil.ReadAll(r.Body)
 	err := json.Unmarshal(body, &user)
